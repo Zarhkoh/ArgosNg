@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head></h:head>
+<body>
+
+</body>
+<h:form id="frmEleve">
+	<p:outputLabel value="Nom: "></p:outputLabel>
+	<p:inputText value="#{eleveCtrl.nom}"></p:inputText>
+
+	<p:outputLabel value="Prénom: "></p:outputLabel>
+	<p:inputText value="#{eleveCtrl.prenom}"></p:inputText>
+	<p:commandButton value="Ajouter"
+		actionListener="#{eleveCtrl.traitementAjoutEleve}" update="tabEleves,frmEleve"></p:commandButton>
+</h:form>
+
+<p:fieldset legend="Liste des élèves">
+	<p:dataTable var="eleve" value="#{eleveCtrl.listEleves}" id="tabEleves">
+		<p:column headerText="Id">
+			<h:outputText value="#{eleve.idEleve}" />
+		</p:column>
+
+		<p:column headerText="Nom">
+			<h:outputText value="#{eleve.nomEleve}" />
+		</p:column>
+
+		<p:column headerText="Prénom">
+			<h:outputText value="#{eleve.prenomEleve}" />
+		</p:column>
+		<!-- <p:column headerText="Supprimer">
+			<p:commandButton value="Supprimer" action="#{eleveCtrl.supprimerEleve(eleve)}" update="tabEleves" process="@this">
+			</p:commandButton>
+		</p:column> -->
+	</p:dataTable>
+</p:fieldset>
+</html>
