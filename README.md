@@ -20,7 +20,7 @@ Je tente ici de mettre au point un PoC du vieillissant Argos (outil de gestion d
 
 ## Installation
 
-###Mise en place du projet
+### Mise en place du projet
 
 Cloner le repo
 
@@ -33,7 +33,7 @@ Installez les dépendances du projet
 	Clic droit sur argosNg > Run as > Maven install
 	
 
-###Configuration de l'accès à la base de donnée.
+### Configuration de l'accès à la base de donnée.
 
 Ouvrez le fichier `applicationContext.xml` dans `argosNg_web/src/main/webapp/WEB-INF`
 
