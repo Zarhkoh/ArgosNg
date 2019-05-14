@@ -1,0 +1,14 @@
+package fr.hdf.idao;
+
+import java.util.List;
+
+import fr.hdf.entities.Eleve;
+
+public interface IEleveDao {
+	public void addEleve(Eleve eleve);
+	
+	public List<Eleve> getAllEleves();
+
+	void supprEleve(Eleve eleve);
+
+}
