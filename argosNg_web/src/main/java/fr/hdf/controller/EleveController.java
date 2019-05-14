@@ -8,12 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import fr.hdf.entities.Diplome;
 import fr.hdf.entities.Eleve;
 import fr.hdf.iservices.IEleveService;
 
 @Controller("eleveCtrl")
 @Scope("session")
 public class EleveController {
+	
+	public void supprimerEleve(Eleve eleve) {
+		getEleveService().supprimerEleve(eleve);
+		listEleves = getEleveService().recupEleves();
+	}
 	
 	@Autowired
 	private IEleveService eleveService;
@@ -22,6 +28,7 @@ public class EleveController {
 	
 	private String nom;
 	private String prenom;
+	private Diplome diplome;
 	private List<Eleve> listEleves;
 	
 	@PostConstruct
@@ -33,6 +40,7 @@ public class EleveController {
 		eleve= new Eleve();
 		eleve.setNomEleve(nom);
 		eleve.setPrenomEleve(prenom);
+		eleve.setDiplome(diplome);
 		getEleveService().ajouterEleve(eleve);
 		setNom(null);
 		setPrenom(null);

@@ -16,8 +16,21 @@
 
 	<p:outputLabel value="Prénom: "></p:outputLabel>
 	<p:inputText value="#{eleveCtrl.prenom}"></p:inputText>
+	<p:outputLabel for="frmEleveDiplomeList" value="Diplome: " />
+	<p:selectOneMenu id="frmEleveDiplomeList" value="nope"
+		 panelStyle="width:180px" effect="fade"
+		var="d" style="width:160px" filter="true" filterMatchMode="startsWith">
+		<f:selectItems value="#{diplomeCtrl.listDiplomes}" var="diplome"
+			itemLabel="#{diplomeCtrl.libelle}" itemValue="#{}" />
+		<p:column>
+			<h:outputText value="#{t.displayName}" />
+		</p:column>
+	</p:selectOneMenu>
 	<p:commandButton value="Ajouter"
-		actionListener="#{eleveCtrl.traitementAjoutEleve}" update="tabEleves,frmEleve"></p:commandButton>
+		actionListener="#{eleveCtrl.traitementAjoutEleve}"
+		update="tabEleves,frmEleve">
+	</p:commandButton>
+
 </h:form>
 
 <p:fieldset legend="Liste des élèves">
@@ -33,10 +46,49 @@
 		<p:column headerText="Prénom">
 			<h:outputText value="#{eleve.prenomEleve}" />
 		</p:column>
-		<!-- <p:column headerText="Supprimer">
-			<p:commandButton value="Supprimer" action="#{eleveCtrl.supprimerEleve(eleve)}" update="tabEleves" process="@this">
+		<p:column headerText="Diplôme N°">
+			<h:outputText value="#{eleve.diplome.libelleDiplome}" />
+		</p:column>
+		<p:column headerText="Supprimer">
+			<p:commandButton value="X"
+				action="#{eleveCtrl.supprimerEleve(eleve)}" update="tabEleves"
+				process="@this">
 			</p:commandButton>
-		</p:column> -->
+		</p:column>
+	</p:dataTable>
+</p:fieldset>
+
+<h:form id="frmDiplome">
+	<p:outputLabel value="Libellé: "></p:outputLabel>
+	<p:inputText value="#{diplomeCtrl.libelle}"></p:inputText>
+
+	<p:outputLabel for="popup" value="Popup:" />
+	<p:datePicker id="popup" value="#{diplomeCtrl.dateObtention}" />
+	<p:commandButton value="Ajouter"
+		actionListener="#{diplomeCtrl.traitementAjoutDiplome}"
+		update="tabDiplomes, frmDiplome"></p:commandButton>
+</h:form>
+
+<p:fieldset legend="Liste des diplômes">
+	<p:dataTable var="diplome" value="#{diplomeCtrl.listDiplomes}"
+		id="tabDiplomes">
+		<p:column headerText="Id">
+			<h:outputText value="#{diplome.idDiplome}" />
+		</p:column>
+
+		<p:column headerText="Libellé">
+			<h:outputText value="#{diplome.libelleDiplome}" />
+		</p:column>
+
+		<p:column headerText="Date d'obtention">
+			<h:outputText value="#{diplome.dateObtentionDiplome}" />
+		</p:column>
+		<p:column headerText="Supprimer">
+			<p:commandButton value="X"
+				action="#{diplomeCtrl.supprimerDiplome(diplome)}"
+				update="tabDiplomes" process="@this">
+			</p:commandButton>
+		</p:column>
 	</p:dataTable>
 </p:fieldset>
 </html>

@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import fr.hdf.entities.Eleve;
+import fr.hdf.idao.IEleveDao;
 
 @Repository
 public class EleveDaoImpl implements IEleveDao {
@@ -32,4 +33,8 @@ public class EleveDaoImpl implements IEleveDao {
 		return eleves;
 	}
 
+	public void supprEleve(Eleve eleve) {
+		Eleve elv =  entityManager.merge(eleve);
+		entityManager.remove(elv);
+	}
 }
