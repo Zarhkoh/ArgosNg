@@ -22,15 +22,19 @@ Je tente ici de mettre au point un PoC du vieillissant Argos (outil de gestion d
 
 ### Mise en place du projet
 
-Cloner le repo
 
 Créer un nouvel environnement de travail (si nécessaire)
 
-Importez le projet dans Eclipse
-	File > Import... > Existing Maven Projects
+Cloner le repo
+
+Importez le projet dans Eclipse:
+	```File > Import... > Existing Maven Projects```
 	
-Installez les dépendances du projet
-	Clic droit sur argosNg > Run as > Maven install
+Installez le serveur
+*Todo*
+	
+Installez les dépendances du projet:
+	```Clic droit sur argosNg > Run as > Maven install```
 	
 
 ### Configuration de l'accès à la base de donnée.
