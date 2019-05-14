@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.hdf.dao.IEleveDao;
 import fr.hdf.entities.Eleve;
+import fr.hdf.idao.IEleveDao;
 import fr.hdf.iservices.IEleveService;
 
 @Service
@@ -30,6 +30,9 @@ public class EleveServiceImpl implements IEleveService {
 	public List<Eleve> recupEleves() {
 		return eleveDao.getAllEleves();
 		
+	}
+	public void supprimerEleve (Eleve eleve) {
+		eleveDao.supprEleve(eleve);
 	}
 	
 }
