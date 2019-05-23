@@ -3,11 +3,13 @@ package fr.hdf.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -21,7 +23,20 @@ public class Eleve implements Serializable {
 	private Long idEleve;
 	private String nomEleve;
 	private String prenomEleve;
-	private Diplome diplome;
+	
+	private Diplome diplomeEleve;
+	
+	private Enseignant enseignant;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(insertable = true, name = "idenseignant", referencedColumnName = "idEnseignant")
+	public Enseignant getEnseignant() {
+		return enseignant;
+	}
+
+	public void setEnseignant(Enseignant enseignant) {
+		this.enseignant = enseignant;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,14 +74,14 @@ public class Eleve implements Serializable {
 
 	}
 
-	@OneToOne
-	@JoinColumn(insertable = true, name = "idDip", referencedColumnName = "idDiplome")
-	public Diplome getDiplome() {
-		return diplome;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(insertable = true, name = "idDiplome", referencedColumnName = "idDiplome")
+	public Diplome getDiplomeEleve() {
+		return diplomeEleve;
 	}
 
-	public void setDiplome(Diplome diplome) {
-		this.diplome = diplome;
+	public void setDiplomeEleve(Diplome dipElv) {
+		this.diplomeEleve = dipElv;
 	}
 
 }

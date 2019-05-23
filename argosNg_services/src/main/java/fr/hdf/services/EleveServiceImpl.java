@@ -18,7 +18,6 @@ public class EleveServiceImpl implements IEleveService {
 	private IEleveDao eleveDao;
 	
 	public void ajouterEleve(Eleve e1) {
-		System.out.println("eleve: " + e1.getNomEleve() + " " + e1.getPrenomEleve()+ " added to dao");
 		eleveDao.addEleve(e1);
 	}
 	public IEleveDao getEleveDao() {

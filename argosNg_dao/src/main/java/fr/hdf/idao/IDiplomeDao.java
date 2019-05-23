@@ -10,4 +10,10 @@ public interface IDiplomeDao {
 	public List<Diplome> getAllDiplomes();
 
 	void supprDiplome(Diplome diplome);
+	
+	public void editDiplome(Diplome diplome);
+
+//	public Diplome getDiplomeByLibelleDip(String libelleDiplome);
+
+	public Diplome getDiplomeByIdDip(Long idDiplome);
 }

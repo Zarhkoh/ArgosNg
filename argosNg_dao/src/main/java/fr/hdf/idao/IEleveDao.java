@@ -10,5 +10,7 @@ public interface IEleveDao {
 	public List<Eleve> getAllEleves();
 
 	void supprEleve(Eleve eleve);
+	
+	public void editEleve(Eleve eleve);
 
 }

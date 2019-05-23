@@ -34,4 +34,23 @@ public class DiplomeDaoImpl implements IDiplomeDao {
 		Diplome dpl = entityManager.merge(diplome);
 		entityManager.remove(dpl);
 	}
+
+	public void editDiplome(Diplome diplome) {
+		Query req = entityManager.createQuery("select d from Diplome d where d.id = :id");
+		entityManager.merge(diplome);
+
+	}
+
+	public Diplome getDiplomeByIdDip(Long idDiplome) {
+		Query q = entityManager.createQuery("select d from Diplome d where d.id = :idDip");
+		q.setParameter("idDip", idDiplome);
+		return (Diplome) q.getSingleResult();
+	}
+
+//	public Diplome getDiplomeByLibelleDip(String libelleDiplome) {
+//		Query query = entityManager.createQuery("select d from Diplome d where d.libelleDiplome = :libDip");
+//		query.setParameter("libDip",libelleDiplome);
+//		
+//		return (Diplome) query.getSingleResult();
+//	}
 }

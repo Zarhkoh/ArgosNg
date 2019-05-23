@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition>
+		<p:dataTable var="eachEns" id="tabEns"
+			value="#{enseignantCtrl.listEnseignants}" editable="true">
+			<f:facet name="header">
+            Enseignants
+        </f:facet>
+			<p:ajax event="rowEdit" listener="#{enseignantCtrl.onRowEdit}"
+				update="tabEns" />
+			<p:ajax event="rowEditCancel" update="tabEns" />
+
+			<p:column headerText="Id" style="width:8%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{eachEns.idEnseignant}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="modelInput" value="#{eachEns.idEnseignant}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Nom">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{eachEns.nomEnseignant}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{eachEns.nomEnseignant}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Prénom">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{enseignant.prenomEnseignant}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{enseignant.prenomEnseignant}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Matière">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{enseignant.matiereEnseignant}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{enseignant.matiereEnseignant}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column style="width:8%" headerText="Edit">
+				<p:rowEditor />
+			</p:column>
+			<p:column style="width:8%" headerText="X">
+				<p:commandButton value="X"
+					action="#{enseignantCtrl.supprimerEnseignant(eachEns)}"
+					update="tabEns" process="@this" />
+			</p:column>
+		</p:dataTable>
+	</ui:composition>
+</h:body>
+</html>

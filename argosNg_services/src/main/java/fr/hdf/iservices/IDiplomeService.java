@@ -13,4 +13,10 @@ public interface IDiplomeService {
 	public List<Diplome> recupDiplomes();
 	
 	public void supprimerDiplome (Diplome diplome);
+
+	public void modifierDiplome(Diplome d1);
+
+	public Diplome getDiplomeByiD(Long idDiplome);
+
+//	public Diplome getDiplomeByLibelle(String libelleDiplome);
 }

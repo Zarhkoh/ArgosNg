@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head></h:head>
+<body>
+</body>
+<ui:composition>
+
+	<p:accordionPanel id="accForms">
+		<p:tab title="Ajouter un élève">
+			<!-- ELEVE FORM -->
+			<h:form id="frmElv">
+				<p:outputLabel value="Nom: "></p:outputLabel>
+				<p:inputText value="#{eleveCtrl.nom}" />
+
+				<p:outputLabel value="Prénom: " />
+				<p:inputText value="#{eleveCtrl.prenom}" />
+
+
+				<p:outputLabel value="Diplome: " />
+
+				<p:selectOneMenu id="frmEleveDiplomeList"
+					value="#{eleveCtrl.idDiplome}" required="false">
+					<f:selectItem itemLabel="Select One" itemValue="" />
+					<f:selectItems value="#{diplomeCtrl.listDiplomes}" var="eachDip"
+						itemLabel="#{eachDip.libelleDiplome}"
+						itemValue="#{eachDip.idDiplome}" />
+				</p:selectOneMenu>
+
+				<p:commandButton value="Ajouter"
+					action="#{eleveCtrl.traitementAjoutEleve}" update="accForms:frmElv" />
+			</h:form>
+
+		</p:tab>
+		<p:tab title="Ajouter un diplôme">
+
+
+			<!-- DIPLOME FORM -->
+			<h:form id="frmDip">
+				<p:outputLabel for="frmDipLib" value="Libellé: " />
+				<p:inputText id="frmDipLib" value="#{diplomeCtrl.libelle}" />
+
+				<p:outputLabel for="frmDipDate" value=" Date d'obtention: " />
+				<p:datePicker id="frmDipDate" value="#{diplomeCtrl.dateObtention}" />
+				<p:commandButton value="Ajouter"
+					actionListener="#{diplomeCtrl.traitementAjoutDiplome}"
+					update="frmDip, accForms:frmElv" />
+			</h:form>
+		</p:tab>
+
+		<p:tab title="Ajouter un Enseignant">
+			<!-- ENSEIGNANTS FORM -->
+			<h:form id="frmEns" style="margin-bottom: 10px;">
+				<p:outputLabel value="Nom: " />
+				<p:inputText value="#{enseignantCtrl.nom}" />
+				<p:outputLabel value="Prénom: " />
+				<p:inputText value="#{enseignantCtrl.prenom}" />
+				<p:outputLabel value="Matière: " />
+				<p:inputText value="#{enseignantCtrl.matiere}" />
+				<p:commandButton value="Ajouter"
+					actionListener="#{enseignantCtrl.traitementAjoutEnseignant}"
+					update="frmEns" />
+
+				</p:tab>
+			</h:form>
+		</p:tab>
+	</p:accordionPanel>
+</ui:composition>
+</html>
