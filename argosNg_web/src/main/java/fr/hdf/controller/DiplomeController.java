@@ -36,9 +36,7 @@ public class DiplomeController {
     public void onRowEdit(RowEditEvent event) {
     	Diplome diplome =(Diplome) event.getObject();
     	getDiplomeService().modifierDiplome(diplome);
-    	diplome.getIdDiplome();
-    	System.out.println(diplome.getIdDiplome()+"****** "+diplome.getLibelleDiplome());
-        
+    	diplome.getIdDiplome();        
      
     }
 	public void traitementAjoutDiplome() {
@@ -58,8 +56,8 @@ public class DiplomeController {
 	
 	public void editerDiplome(Diplome diplome) {	
 //		Diplome dip1 = (Diplome) event.getObject();
-//		getDiplomeService().modifierDiplome(dip1);
 		Diplome di1= diplome;
+		getDiplomeService().modifierDiplome(di1);
 		listDiplomes = getDiplomeService().recupDiplomes();
 		System.out.println("Fonction editerDiplome: Done.");
 	}
