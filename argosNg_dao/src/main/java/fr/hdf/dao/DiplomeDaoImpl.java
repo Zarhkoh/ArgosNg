@@ -37,6 +37,7 @@ public class DiplomeDaoImpl implements IDiplomeDao {
 
 	public void editDiplome(Diplome diplome) {
 		Query req = entityManager.createQuery("select d from Diplome d where d.id = :id");
+		req.setParameter("idDip", diplome);
 		entityManager.merge(diplome);
 
 	}
@@ -46,11 +47,4 @@ public class DiplomeDaoImpl implements IDiplomeDao {
 		q.setParameter("idDip", idDiplome);
 		return (Diplome) q.getSingleResult();
 	}
-
-//	public Diplome getDiplomeByLibelleDip(String libelleDiplome) {
-//		Query query = entityManager.createQuery("select d from Diplome d where d.libelleDiplome = :libDip");
-//		query.setParameter("libDip",libelleDiplome);
-//		
-//		return (Diplome) query.getSingleResult();
-//	}
 }

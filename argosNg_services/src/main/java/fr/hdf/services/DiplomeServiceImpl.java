@@ -18,7 +18,6 @@ public class DiplomeServiceImpl implements IDiplomeService {
 	private IDiplomeDao diplomeDao;
 
 	public void ajouterDiplome(Diplome d1) {
-		System.out.println("Diplome" + d1.getLibelleDiplome() + "envoyé au DAO");
 		diplomeDao.addDiplome(d1);
 	}
 

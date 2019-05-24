@@ -5,12 +5,14 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
 http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 <persistence-unit name="UPGEE" transaction-type="RESOURCE_LOCAL">
   	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>fr.hdf.entities.Cours</class>
+		<class>fr.hdf.entities.CoursPK</class>
 		<class>fr.hdf.entities.Diplome</class>
 		<class>fr.hdf.entities.Eleve</class>
 		<class>fr.hdf.entities.Enseignant</class>
 		<properties>
   			<property name="hibernate.show_sql" value="true"/>
-  			<property name="hibernate.hbm2ddl.auto" value="update"/>
+  			<property name="hibernate.hbm2ddl.auto" value="create"/>
   			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
   		</properties>
 	</persistence-unit>

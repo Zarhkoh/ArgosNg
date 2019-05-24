@@ -18,5 +18,4 @@ public interface IDiplomeService {
 
 	public Diplome getDiplomeByiD(Long idDiplome);
 
-//	public Diplome getDiplomeByLibelle(String libelleDiplome);
 }

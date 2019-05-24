@@ -12,8 +12,6 @@ public interface IDiplomeDao {
 	void supprDiplome(Diplome diplome);
 	
 	public void editDiplome(Diplome diplome);
-
-//	public Diplome getDiplomeByLibelleDip(String libelleDiplome);
-
+	
 	public Diplome getDiplomeByIdDip(Long idDiplome);
 }
