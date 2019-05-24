@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+	<h:head> </h:head>
+<h:body>
+<ui:composition>
+<p:fieldset legend="Liste des cours">
+	<p:dataTable var="eachCours" value="#{coursCtrl.listCours}" id="tabCrs">
+		<p:column headerText="Id">
+			<h:outputText value="#{eachCours.idCours}" />
+		</p:column>
+
+		<p:column headerText="Intitulé">
+			<h:outputText value="#{eachCours.intituleCours}" />
+		</p:column>
+		
+		<p:column headerText="Supprimer">
+			<p:commandButton value="X"
+				action="#{coursCtrl.supprimerCours(eachCours)}" update="tabCrs"
+				process="@this" />
+		</p:column>
+	</p:dataTable>
+</p:fieldset>
+</ui:composition> </h:body>
+</html>
