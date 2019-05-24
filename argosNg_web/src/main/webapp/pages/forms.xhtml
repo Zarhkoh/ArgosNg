@@ -21,7 +21,6 @@
 				<p:outputLabel value="Prénom: " />
 				<p:inputText value="#{eleveCtrl.prenom}" />
 
-
 				<p:outputLabel value="Diplome: " />
 
 				<p:selectOneMenu id="frmEleveDiplomeList"
@@ -33,15 +32,16 @@
 				</p:selectOneMenu>
 
 				<p:commandButton value="Ajouter"
-					action="#{eleveCtrl.traitementAjoutEleve}" update="accForms:frmElv" />
+					action="#{eleveCtrl.traitementAjoutEleve}"
+					update="accForms:frmElv, tabElvs" />
 			</h:form>
 
 		</p:tab>
 		<p:tab title="Ajouter un diplôme">
 
 
-			<!-- DIPLOME FORM -->
-			<h:form id="frmDip">
+DIPLOME FORM
+<h:form id="frmDip">
 				<p:outputLabel for="frmDipLib" value="Libellé: " />
 				<p:inputText id="frmDipLib" value="#{diplomeCtrl.libelle}" />
 
@@ -49,11 +49,11 @@
 				<p:datePicker id="frmDipDate" value="#{diplomeCtrl.dateObtention}" />
 				<p:commandButton value="Ajouter"
 					actionListener="#{diplomeCtrl.traitementAjoutDiplome}"
-					update="frmDip, accForms:frmElv" />
+					update="frmDip, accForms:frmElv,tabDips" />
 			</h:form>
 		</p:tab>
 
-		<p:tab title="Ajouter un Enseignant">
+		<p:tab title="Ajouter un enseignant">
 			<!-- ENSEIGNANTS FORM -->
 			<h:form id="frmEns" style="margin-bottom: 10px;">
 				<p:outputLabel value="Nom: " />
@@ -65,8 +65,15 @@
 				<p:commandButton value="Ajouter"
 					actionListener="#{enseignantCtrl.traitementAjoutEnseignant}"
 					update="frmEns" />
-
-				</p:tab>
+			</h:form>
+		</p:tab>
+		<p:tab title="Ajouter un cours">
+			<!-- COURS FORM -->
+			<h:form id="frmCrs" style="margin-bottom: 10px;">
+				<p:outputLabel value="Intitulé: " />
+				<p:inputText value="#{coursCtrl.intitule}" />
+				<p:commandButton value="Ajouter"
+					actionListener="#{coursCtrl.traitementAjoutCours}" update="frmCrs" />
 			</h:form>
 		</p:tab>
 	</p:accordionPanel>
