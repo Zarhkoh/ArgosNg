@@ -23,7 +23,6 @@ private Cours cours;
 private String intitule;
 private List<Cours> listCours;
 
-@PostConstruct
 public void init() {
 	listCours = getCoursService().recupCours(); 
 }
@@ -43,7 +42,10 @@ public void supprimerCours(Cours cours) {
 	listCours = getCoursService().recupCours();
 }
 
-
+public String redirectToCoursPage() {
+	init();
+	return "/pages/gestionCours.xhtml";
+}
 
 
 public ICoursService getCoursService() {

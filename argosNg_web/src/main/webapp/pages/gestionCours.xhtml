@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+
+	<!-- ================== COURS FORM ================== -->
+	<h:form id="frmCrs" style="margin-bottom: 10px;">
+		<p:outputLabel value="Intitulé: " />
+		<p:inputText value="#{coursCtrl.intitule}" />
+		<p:commandButton value="Ajouter"
+			actionListener="#{coursCtrl.traitementAjoutCours}"
+			update="frmCrs, tabCrs" />
+	</h:form>
+
+
+	<!-- ================== COURS TABLE  ================== -->
+	<h:form id="tabCrs">
+		<p:dataTable var="eachCours" 
+			value="#{coursCtrl.listCours}" editable="true" rows="10"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15">
+			<f:facet name="header">
+            Cours
+        </f:facet>
+			<p:ajax event="rowEdit" listener="#{coursCtrl.onRowEdit}"
+				update="tabCrs" />
+			<p:ajax event="rowEditCancel" update="tabCrs" />
+			<p:column headerText="Id" style="width:8%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{eachCrs.idCours}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="modelInput" value="#{eachCrs.idCours}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Intitulé">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{eachCrs.intituleCours}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{eachCrs.intituleCours}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column style="width:8%" headerText="Edit">
+				<p:rowEditor />
+			</p:column>
+			<p:column style="width:8%" headerText="X">
+				<p:commandButton value="X"
+					action="#{diplomeCtrl.supprimerDiplome(eachDip)}"
+					update="tabDips, tabElvs" process="@this" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

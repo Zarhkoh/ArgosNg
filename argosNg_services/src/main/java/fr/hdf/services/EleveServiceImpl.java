@@ -33,5 +33,9 @@ public class EleveServiceImpl implements IEleveService {
 	public void supprimerEleve (Eleve eleve) {
 		eleveDao.supprEleve(eleve);
 	}
+	public void modifierEleve(Eleve e1) {
+		eleveDao.editEleve(e1);
+		
+	}
 	
 }

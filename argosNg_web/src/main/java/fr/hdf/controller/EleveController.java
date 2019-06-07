@@ -3,6 +3,8 @@ package fr.hdf.controller;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+
+import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -37,7 +39,10 @@ public class EleveController {
 	private Long idDiplome;
 	
 
-
+	 public void onRowEdit(RowEditEvent event) {
+	    	Eleve eleve=(Eleve) event.getObject();    	
+	    	getEleveService().modifierEleve(eleve);
+	    }
 
 	public Long getIdDiplome() {
 		return idDiplome;
@@ -47,7 +52,6 @@ public class EleveController {
 		this.idDiplome = idDiplome;
 	}
 
-	@PostConstruct
 	public void init() {
 		listEleves = getEleveService().recupEleves(); 
 		listDiplomes = getDiplomeService().recupDiplomes();
@@ -56,22 +60,33 @@ public class EleveController {
 	}
 	
 	public void traitementAjoutEleve() {
-		getEleve();
 		getDiplomeEleve();
 		eleve= new Eleve();
 		eleve.setNomEleve(nom);
 		eleve.setPrenomEleve(prenom);
-		diplomeEleve = diplomeService.getDiplomeByiD(idDiplome);
-		eleve.setDiplomeEleve(diplomeEleve);
+		if(idDiplome != null) {
+			diplomeEleve = diplomeService.getDiplomeByiD(idDiplome);
+			eleve.setDiplomeEleve(diplomeEleve);
+		}
+		else {
+			eleve.setDiplomeEleve(null);
+		}
 		getEleveService().ajouterEleve(eleve);
+		setDiplomeEleve(null);
 		setNom(null);
 		setPrenom(null);
-		System.out.println(eleve.getNomEleve() + " " + eleve.getPrenomEleve() +  " ajouté(e) à la base de donnée.");		
 		listEleves = getEleveService().recupEleves(); 
 		}
 	
+	public String redirectToDiplomePage() {
+		init();
+		return "/pages/gestionDiplome.xhtml";
+	}
 	
-	
+	public String redirectToElevePage() {
+		init();
+		return "/pages/gestionEleve.xhtml";
+	}
 	
 	public void elevesSansDiplome(){
 		for (int i = 0; i < listEleves.size(); i++) {

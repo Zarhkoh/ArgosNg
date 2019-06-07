@@ -3,8 +3,6 @@ package fr.hdf.controller;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 
 import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,6 @@ public class DiplomeController {
 	private Date dateObtention;
 	private List<Diplome> listDiplomes;
 	
-	@PostConstruct
 	public void init() {
 		listDiplomes = getDiplomeService().recupDiplomes(); 
 	}
@@ -36,9 +33,8 @@ public class DiplomeController {
     public void onRowEdit(RowEditEvent event) {
     	Diplome diplome =(Diplome) event.getObject();
     	getDiplomeService().modifierDiplome(diplome);
-    	diplome.getIdDiplome();        
-     
     }
+    
 	public void traitementAjoutDiplome() {
 		diplome = new Diplome();
 		diplome.setLibelleDiplome(libelle);
@@ -54,13 +50,12 @@ public class DiplomeController {
 		listDiplomes = getDiplomeService().recupDiplomes();
 	}
 	
-	public void editerDiplome(Diplome diplome) {	
-//		Diplome dip1 = (Diplome) event.getObject();
-		Diplome di1= diplome;
-		getDiplomeService().modifierDiplome(di1);
-		listDiplomes = getDiplomeService().recupDiplomes();
-		System.out.println("Fonction editerDiplome: Done.");
+	
+	public String redirectToDiplomePage() {
+		init();
+		return "/pages/gestionDiplome.xhtml";
 	}
+	
 
 	public IDiplomeService getDiplomeService() {
 		return diplomeService;
@@ -95,6 +90,7 @@ public class DiplomeController {
 	}
 
 	public List<Diplome> getListDiplomes() {
+		listDiplomes = getDiplomeService().recupDiplomes(); 
 		return listDiplomes;
 	}
 

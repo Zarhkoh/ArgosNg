@@ -28,10 +28,12 @@ public class EleveDaoImpl implements IEleveDao {
 	
 	public void addEleve(Eleve eleve) {
 		Eleve e2 = entityManager.merge(eleve);
-		
+		if(e2.getDiplomeEleve() != null) {
+			
 		Diplome diplome = diplomeDao.getDiplomeByIdDip(e2.getDiplomeEleve().getIdDiplome());
-		e2.setDiplomeEleve(diplome);
-		entityManager.persist(e2);
+			e2.setDiplomeEleve(diplome);			
+		}
+			entityManager.persist(e2);
 		
 	}
 	
@@ -49,7 +51,7 @@ public class EleveDaoImpl implements IEleveDao {
 	}
 
 	public void editEleve(Eleve eleve) {
-		entityManager.persist(eleve);
+		entityManager.merge(eleve);
 	
 		
 	}

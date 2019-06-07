@@ -26,7 +26,6 @@ public class EnseignantController {
 	private String matiere;
 	private List<Enseignant> listEnseignants;
 	
-	@PostConstruct
 	public void init() {
 		listEnseignants = getEnseignantService().recupEnseignants();
 	}
@@ -44,6 +43,10 @@ public class EnseignantController {
 		listEnseignants = getEnseignantService().recupEnseignants();
 	}
 
+	public String redirectToEnseignantPage() {
+		init();
+		return "/pages/gestionEnseignant.xhtml";
+	}
 	public void supprimerEnseignant(Enseignant enseignant) {
 		
 		getEnseignantService().supprimerEnseignant(enseignant);

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+</h:head>
+<h:body>
+	<!-- ================== ELEVE FORM ================== -->
+
+
+	<h:form id="frmElv">
+		<p:outputLabel value="Nom: "></p:outputLabel>
+		<p:inputText value="#{eleveCtrl.nom}" />
+
+		<p:outputLabel value="Prénom: " />
+		<p:inputText value="#{eleveCtrl.prenom}" />
+
+		<p:outputLabel value="Diplome: " />
+
+		<p:selectOneMenu value="#{eleveCtrl.idDiplome}" filter="true"
+			filterMatchMode="startsWith">
+			<f:selectItem itemLabel="Select One" itemValue="" />
+			<f:selectItems value="#{diplomeCtrl.listDiplomes}" var="eachDip"
+				itemLabel="#{eachDip.libelleDiplome}"
+				itemValue="#{eachDip.idDiplome}" />
+		</p:selectOneMenu>
+
+		<p:commandButton value="Ajouter"
+			action="#{eleveCtrl.traitementAjoutEleve}" update="frmElv, tabElvs" />
+	</h:form>
+
+
+	<!-- ================== ELEVE TABLE ================== -->
+
+	<h:form id="tabElvs">
+		<p:dataTable var="eachElv" value="#{eleveCtrl.listEleves}"
+			editable="true" style="margin-bottom:100px" rows="10"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15">
+			<f:facet name="header">
+            Elèves
+        </f:facet>
+			<p:ajax event="rowEdit" listener="#{eleveCtrl.onRowEdit}" />
+			<p:ajax event="rowEditCancel" />
+			<p:column headerText="Id" style="width:8%"
+				sortBy="#{eachElv.idEleve}" filterBy="#{eachElv.idEleve}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{eachElv.idEleve}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="modelInput" value="#{eachElv.idEleve}"
+							style="width:100%" disabled="true" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Nom" sortBy="#{eachElv.nomEleve}"
+				filterBy="#{eachElv.nomEleve}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{eachElv.nomEleve}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{eachElv.nomEleve}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Prénom" sortBy="#{eachElv.prenomEleve}"
+				filterBy="#{eachElv.prenomEleve}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{eachElv.prenomEleve}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:datePicker value="#{eachElv.prenomEleve}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Diplôme" sortBy="#{eachElv.diplomeEleve}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{eachElv.diplomeEleve.libelleDiplome}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:selectOneMenu value="#{eachElv.diplomeEleve}" filter="true"
+							filterMatchMode="startsWith" style="width:90%">
+							<f:selectItem itemLabel="Select One" itemValue="" />
+							<f:selectItems value="#{diplomeCtrl.listDiplomes}" var="eachDip"
+								itemLabel="#{eachDip.libelleDiplome}"
+								itemValue="#{eachDip.idDiplome}" />
+						</p:selectOneMenu>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column style="width:8%" headerText="Edit">
+				<p:rowEditor />
+			</p:column>
+			<p:column style="width:8%" headerText="X">
+				<p:commandButton value="X"
+					action="#{eleveCtrl.supprimerEleve(eachElv)}" update="tabElvs"
+					process="@this" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

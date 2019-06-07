@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+<h:form id="frmDip">
+		<p:outputLabel for="frmDipLib" value="Libellé: " />
+		<p:inputText id="frmDipLib" value="#{diplomeCtrl.libelle}" />
+
+		<p:outputLabel for="frmDipDate" value=" Date d'obtention: " />
+		<p:datePicker id="frmDipDate" value="#{diplomeCtrl.dateObtention}" />
+
+		<p:commandButton value="Ajouter" process="frmDip" 
+			actionListener="#{diplomeCtrl.traitementAjoutDiplome}"
+			update="frmDip, tabDips"/>
+	</h:form>
+	
+	<h:form id="tabDips">
+		<p:dataTable  var="eachDip" value="#{diplomeCtrl.listDiplomes}"
+			editable="true" rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15" sortBy="#{eachDip.idDiplome}">
+			<f:facet name="header">
+            Diplômes
+        </f:facet>
+			<p:ajax event="rowEdit" listener="#{diplomeCtrl.onRowEdit}" />
+			<p:ajax event="rowEditCancel" />
+			<p:column headerText="Id" style="width:10%"
+				sortBy="#{eachDip.idDiplome}" filterBy="#{eachDip.idDiplome}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{eachDip.idDiplome}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="modelInput" value="#{eachDip.idDiplome}"
+							disabled="true" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Libellé" sortBy="#{eachDip.libelleDiplome}"
+				filterBy="#{eachDip.libelleDiplome}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{eachDip.libelleDiplome}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{eachDip.libelleDiplome}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Date d'obtention"
+				sortBy="#{eachDip.dateObtentionDiplome}"
+				filterBy="#{eachDip.dateObtentionDiplome}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{eachDip.dateObtentionDiplome}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</f:facet>
+					<f:facet name="input">
+						<p:datePicker value="#{eachDip.dateObtentionDiplome}"
+							style="width:100%">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:datePicker>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column style="width:8%" headerText="Edit">
+				<p:rowEditor />
+			</p:column>
+			<p:column style="width:8%" headerText="X">
+				<p:commandButton value="X"
+					action="#{diplomeCtrl.supprimerDiplome(eachDip)}" update="tabDips"
+					process="@this" />
+			</p:column>
+		</p:dataTable>
+		</h:form>
+</h:body>
+</html>

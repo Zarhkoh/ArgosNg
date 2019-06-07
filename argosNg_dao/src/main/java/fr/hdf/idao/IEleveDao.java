@@ -2,6 +2,7 @@ package fr.hdf.idao;
 
 import java.util.List;
 
+import fr.hdf.entities.Diplome;
 import fr.hdf.entities.Eleve;
 
 public interface IEleveDao {

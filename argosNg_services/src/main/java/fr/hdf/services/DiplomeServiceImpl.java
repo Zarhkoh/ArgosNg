@@ -42,8 +42,4 @@ public class DiplomeServiceImpl implements IDiplomeService {
 		return diplomeDao.getDiplomeByIdDip(idDiplome);
 	}
 
-//	public Diplome getDiplomeByLibelle(String libelleDiplome) {
-//		
-//		return diplomeDao.getDiplomeByLibelleDip(libelleDiplome);
-//	}
 }

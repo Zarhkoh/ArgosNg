@@ -36,8 +36,6 @@ public class DiplomeDaoImpl implements IDiplomeDao {
 	}
 
 	public void editDiplome(Diplome diplome) {
-		Query req = entityManager.createQuery("select d from Diplome d where d.id = :id");
-		req.setParameter("idDip", diplome);
 		entityManager.merge(diplome);
 
 	}
